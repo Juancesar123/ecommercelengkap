@@ -1,3 +1,6 @@
+<li class="{{ Request::is('home*') ? 'active' : '' }}">
+    <a href="/home"><i class="fa fa-home"></i><span>Home</span></a>
+</li>
 <li class="{{ Request::is('mereks*') ? 'active' : '' }} {{ Request::is('categories*') ? 'active' : '' }} treeview">
     <a href="#">
         <i class="fa fa-dashboard"></i> <span>Management Product</span>
