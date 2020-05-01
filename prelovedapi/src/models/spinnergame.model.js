@@ -6,6 +6,10 @@ const DataTypes = Sequelize.DataTypes;
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
   const spinnergame = sequelizeClient.define('spinnergame', {
+    fullname: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     hadiah: {
       type: DataTypes.STRING,
       allowNull: false
@@ -28,9 +32,6 @@ module.exports = function (app) {
 
   // eslint-disable-next-line no-unused-vars
   spinnergame.associate = function (models) {
-    const Users = models.users;
-    const Spinnergame  = models.spinnergame;
-    Spinnergame.belongsTo(Users);
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
   };

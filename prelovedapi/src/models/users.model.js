@@ -28,15 +28,6 @@ module.exports = function (app) {
 
   // eslint-disable-next-line no-unused-vars
   users.associate = function (models) {
-    const Users = models.users;
-    const Spinnergame  = models.spinnergame;
-    Users.hasOne(Spinnergame);
-    const Guesprice  = models.guesprice;
-    Users.hasOne(Guesprice);
-    const Guesbrand  = models.guesprice;
-    Users.hasOne(Guesbrand);
-    const Puzzlegame  = models.puzzlegame;
-    Users.hasOne(Puzzlegame);
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
   };

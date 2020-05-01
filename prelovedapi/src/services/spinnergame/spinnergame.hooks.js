@@ -5,8 +5,8 @@ const spinnergamehook = require('../../hooks/spinnergamehook');
 module.exports = {
   before: {
     all: [  ],
-    find: [spinnergamehook()],
-    get: [spinnergamehook()],
+    find: [],
+    get: [],
     create: [],
     update: [],
     patch: [],

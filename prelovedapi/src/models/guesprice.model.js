@@ -6,8 +6,12 @@ const DataTypes = Sequelize.DataTypes;
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
   const guesprice = sequelizeClient.define('guesprice', {
+    fullname: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     time: {
-      type: DataTypes.TIME,
+      type: DataTypes.STRING,
       allowNull: false
     },
     total_answer_correct: {
@@ -28,9 +32,6 @@ module.exports = function (app) {
 
   // eslint-disable-next-line no-unused-vars
   guesprice.associate = function (models) {
-    const Users = models.users;
-    const Guesprice  = models.guesprice;
-    Guesprice.belongsTo(Users);
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
   };
