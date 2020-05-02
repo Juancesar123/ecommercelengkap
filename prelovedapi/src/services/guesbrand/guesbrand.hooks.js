@@ -5,8 +5,8 @@ const guesbrandhook = require('../../hooks/guesbrandhook');
 module.exports = {
   before: {
     all: [  ],
-    find: [guesbrandhook()],
-    get: [guesbrandhook()],
+    find: [],
+    get: [],
     create: [],
     update: [],
     patch: [],

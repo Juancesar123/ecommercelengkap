@@ -5,8 +5,8 @@ const puzzlegamehook = require('../../hooks/puzzlegamehook');
 module.exports = {
   before: {
     all: [],
-    find: [puzzlegamehook()],
-    get: [puzzlegamehook()],
+    find: [],
+    get: [],
     create: [],
     update: [],
     patch: [],

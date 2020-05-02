@@ -5,8 +5,8 @@ const guespricehook = require('../../hooks/guespricehook');
 module.exports = {
   before: {
     all: [],
-    find: [guespricehook()],
-    get: [guespricehook()],
+    find: [],
+    get: [],
     create: [],
     update: [],
     patch: [],
