@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('homepage.index');
 });
 Route::get('/linkstorage', function () {
     Artisan::call('storage:link');
@@ -29,6 +29,7 @@ Route::resource('categories', 'categoryController');
 Route::resource('products', 'productController');
 
 Route::resource('orders', 'ordersController');
-
+Route::resource('users', 'UsersController');
+route::get('blockuser/{id}','UsersController@block')->name('users.block');
 Route::get('get_product','ProductController@getProduct');
 Route::resource('transaksiPembelians', 'transaksiPembelianController');
