@@ -205,4 +205,39 @@ class productController extends AppBaseController
         ->get();
         return $products;
     }
+    public function details($id){
+        $purchases = DB::table('carts')
+        ->join('products', 'products.id', '=', 'carts.id_product')
+        ->select('carts.*','products.product_name','products.price','products.poto')
+        ->where('sessionid',session()->getId())
+        ->sum('products.price');
+        $cart = DB::table('carts')
+        ->join('products', 'products.id', '=', 'carts.id_product')
+        ->select('carts.*','products.product_name','products.price','products.poto')
+        ->where('sessionid',session()->getId())
+        ->get();
+        $products = DB::table('products')
+        ->join('mereks', 'mereks.id', '=', 'products.brand')
+        ->join('categories', 'categories.id', '=', 'products.category')
+        ->select('products.*', 'mereks.name','categories.category_name')
+        ->where('products.id','=',$id)
+        ->first();
+        $size = DB::table('size_stok')
+        ->where('size_stok.id_product','=',$id)
+        ->get();
+        $color = DB::table('color')
+        ->where('color.id_product','=',$id)
+        ->get();
+        $imageproduct = DB::table('image_product')
+        ->where('image_product.id_product','=',$id)
+        ->get();
+        return view('Productdetails.index',[
+                'products' => $products,
+                'color'=>$color,
+                'cart' => $cart,
+                'purchases'=>$purchases,
+                'size' => $size,
+                'imageproduct'=>$imageproduct
+            ]);
+    }
 }
