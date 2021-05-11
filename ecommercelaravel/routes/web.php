@@ -13,7 +13,7 @@
 
 Route::get('/', 'HomePageController@index');
 Route::post('/add-to-cart/{id}', 'CartController@addcart');
-Route::get('/product-details/{id}', 'ProductController@details');
+Route::get('/product-details/{id}', 'productController@details');
 Route::get('/cart', 'CartController@cart');
 Route::get('/checkout', 'CheckoutController@index');
 Route::get('/delete-cart/{id}', 'CartController@deleteCart');

@@ -17,6 +17,7 @@ class CreateCartsTable extends Migration
             $table->bigIncrements('id');
             $table->string('sessionid');
             $table->integer('id_product')->unsigned();
+            $table->integer('total_harga');
             $table->foreign('id_product')->references('id')->on('products');
             $table->timestamps();
         });
