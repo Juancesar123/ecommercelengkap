@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Order;
+use Auth;
+use App\Detailuser;
+use App\User;
 class ordersController extends Controller
 {
     /**
@@ -58,7 +62,54 @@ class ordersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = DB::table('users')
+        ->join('detailuser', 'detailuser.id', '=', 'users.profile_id')
+        ->where('users.id',Auth::user()->id)
+        ->select('users.*','detailuser.address','detailuser.city','detailuser.province','detailuser.first_name','detailuser.last_name','detailuser.phone_number')
+        ->first();
+        if(empty($data->profile_id)){
+            $detailuser = new Detailuser();
+            $detailuser->first_name = $request->first_name;
+            $detailuser->last_name = $request->last_name;
+            $detailuser->address = $request->address;
+            $detailuser->city = $request->city;
+            $detailuser->province = $request->province;
+            $detailuser->phone_number = $request->phone_number;
+            $detailuser->save();
+            $user_id = Auth::user()->id;
+            $user = User::find($user_id);
+            $user->profile_id = $detailuser->id;
+            $user->save();
+            $order = new Order();
+            $order->id_customer = Auth::user()->id;
+            $order->qty = $request->qty;
+            $order->amount = $request->ammount;
+            $order->status = $request->status;
+            $order->alamat_lengkap = $request->address;
+            $order->city = $request->city;
+            $order->province = $request->province;
+            $order->nomor_telepon = $request->phone;
+            $order->weight = $request->weight;
+            $order->id_product = $request->id_product;
+            $order->save();   
+        }else{
+            $order = new Order();
+            $order->id_customer = Auth::user()->id;
+            $order->qty = $request->qty;
+            $order->amount = $request->ammount;
+            $order->status = $request->status;
+            $order->alamat_lengkap = $request->address;
+            $order->city = $request->city;
+            $order->province = $request->province;
+            $order->nomor_telepon = $request->phone;
+            $order->postcode = $request->postcode;
+            $order->email = $request->email;
+            $order->weight = $request->weight;
+            $order->courier = $request->courier;
+            $order->id_product = $request->id_product;
+            $order->save();   
+        }
+        return redirect()->route('homepage');
     }
 
     /**

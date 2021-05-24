@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'HomePageController@index');
+Route::get('/', 'HomePageController@index')->name('homepage');
 Route::post('/add-to-cart/{id}', 'CartController@addcart');
 Route::get('/product-details/{id}', 'productController@details');
 Route::get('/cart', 'CartController@cart');
@@ -25,6 +25,9 @@ Route::resource('mereks', 'merekController');
 //Route::resource('sizestok', 'SizestokController');
 //stok
 Route::get('/getsizestok/{id}','SizestokController@index')->name('sizestok.data');
+Route::post('/getongkir','cekOngkirController@getOngkir')->name('ongkir.data');
+Route::get('/getprovince','cekOngkirController@getProvince')->name('province.data');
+Route::get('/getcity/{province_id}','cekOngkirController@getCity')->name('city.data');
 Route::get('/createsizestok/{id}','SizestokController@create')->name('sizestok.create');
 Route::post('/savesizestok','SizestokController@store')->name('sizestok.store');
 Route::delete('/deletesizestok/{id}','SizestokController@destroy')->name('sizestok.destroy');

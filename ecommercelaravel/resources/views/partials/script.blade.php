@@ -12,3 +12,4 @@
 <script src="{{asset('assets/js/wow.min.js')}}"></script>
 <script src="{{asset('assets/js/imagesloaded.pkgd.min.js')}}"></script>
 <script src="{{asset('assets/js/main.js')}}"></script>
+@yield('script')

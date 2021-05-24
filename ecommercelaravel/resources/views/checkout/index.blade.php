@@ -23,6 +23,7 @@
 <!-- page title area end -->
 @endsection
 @section('content')
+
 <main>
     <!-- page title area end -->
 
@@ -87,86 +88,160 @@
     <!-- checkout-area start -->
     <section class="checkout-area pb-70">
         <div class="container">
-            <form action="#">
+            <form method="POST" action="{{route('orders.store')}}">
+                @csrf
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="checkbox-form">
                             <h3>Billing Details</h3>
                             <div class="row">
-                                <div class="col-md-12">
-                                    <div class="country-select">
-                                        <label>Country <span class="required">*</span></label>
-                                        <select>
-                                            <option value="volvo">bangladesh</option>
-                                            <option value="saab">Algeria</option>
-                                            <option value="mercedes">Afghanistan</option>
-                                            <option value="audi">Ghana</option>
-                                            <option value="audi2">Albania</option>
-                                            <option value="audi3">Bahrain</option>
-                                            <option value="audi4">Colombia</option>
-                                            <option value="audi5">Dominican Republic</option>
-                                        </select>
+                                @if (empty($user->profile_id))
+                                    <div class="col-md-6">
+                                        <div class="checkout-form-list">
+                                            <label>Nama Depan <span class="required">*</span></label>
+                                            <input type="text" placeholder="" name="firstname" id="firstname"/>
+                                        </div>
                                     </div>
-                                </div>
+                                    <div class="col-md-6">
+                                        <div class="checkout-form-list">
+                                            <label>Nama Belakang <span class="required">*</span></label>
+                                            <input type="text" placeholder="" name="lastname" id="lastname"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="checkout-form-list">
+                                            <label>Alamat <span class="required">*</span></label>
+                                            <input type="text" placeholder="Street address" name="address" id="address" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="checkout-form-list">
+                                            <label>Berat Paket <span class="required">*</span></label>
+                                            <input type="text" placeholder="Wight" name="weight" id="weight" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="country-select">
+                                            <label>Provinsi <span class="required">*</span></label>
+                                            <select id="province" name="province">
+
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="country-select">
+                                            <label>Kota <span class="required">*</span></label>
+                                            <select id="city" name="city">
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="country-select">
+                                            <label>Paket Sicepat <span class="required">*</span></label>
+                                            <select id="service" name="service">
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="checkout-form-list">
+                                            <label>Ongkos Kirim <span class="required">*</span></label>
+                                            <input type="text" name="ongkir" id="ongkir" disabled/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="checkout-form-list">
+                                            <label>Kode Pos <span class="required">*</span></label>
+                                            <input type="text" placeholder="Postcode / Zip" name="postcode" id="postcode" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="checkout-form-list">
+                                            <label>Alamat Email <span class="required">*</span></label>
+                                            <input type="email" placeholder="" name="email" id="email"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="checkout-form-list">
+                                            <label>Nomor Telepon <span class="required">*</span></label>
+                                            <input type="text" placeholder="Phone Number" name="phone" id="phone" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="checkout-form-list create-acc">
+                                            <input id="cbox" type="checkbox" />
+                                            <label>Create an account?</label>
+                                        </div>
+                                        <div id="cbox_info" class="checkout-form-list create-account">
+                                            <p>Create an account by entering the information below. If you are a returning
+                                                customer please login at the top of the page.</p>
+                                            <label>Account password <span class="required">*</span></label>
+                                            <input type="password" placeholder="password" />
+                                        </div>
+                                    </div>
+                                @else
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>First Name <span class="required">*</span></label>
-                                        <input type="text" placeholder="" />
+                                        <input type="text" placeholder="" name="firstname" id="firstname" value="{{$user->first_name}}"/>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>Last Name <span class="required">*</span></label>
-                                        <input type="text" placeholder="" />
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="checkout-form-list">
-                                        <label>Company Name</label>
-                                        <input type="text" placeholder="" />
+                                        <input type="text" placeholder="" name="lastname" id="lastname" value="{{$user->last_name}}"/>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="checkout-form-list">
                                         <label>Address <span class="required">*</span></label>
-                                        <input type="text" placeholder="Street address" />
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="checkout-form-list">
-                                        <input type="text" placeholder="Apartment, suite, unit etc. (optional)" />
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="checkout-form-list">
-                                        <label>Town / City <span class="required">*</span></label>
-                                        <input type="text" placeholder="Town / City" />
+                                        <input type="text" placeholder="Street address" name="address" id="address" value="{{$user->address}}"/>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
-                                        <label>State / County <span class="required">*</span></label>
-                                        <input type="text" placeholder="" />
+                                        <label>Berat Paket <span class="required">*</span></label>
+                                        <input type="text" placeholder="Wight" name="weight" id="weight"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="country-select">
+                                        <label>Provinsi <span class="required">*</span></label>
+                                        <select id="province" name="province" value="{{$user->province}}">
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="country-select">
+                                        <label>Kota <span class="required">*</span></label>
+                                        <select id="city" name="city">
+
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>Postcode / Zip <span class="required">*</span></label>
-                                        <input type="text" placeholder="Postcode / Zip" />
+                                        <input type="text" placeholder="Postcode / Zip" name="postcode" id="postcode" value="{{$user->postcode}}"/>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>Email Address <span class="required">*</span></label>
-                                        <input type="email" placeholder="" />
+                                        <input type="email" placeholder="" name="email" id="email" value="{{$user->email}}"/>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>Phone <span class="required">*</span></label>
-                                        <input type="text" placeholder="Postcode / Zip" />
+                                        <input type="text" placeholder="Phone Number" name="phone" id="phone" value="{{$user->phone_number}}"/>
                                     </div>
                                 </div>
+
                                 <div class="col-md-12">
                                     <div class="checkout-form-list create-acc">
                                         <input id="cbox" type="checkbox" />
@@ -179,6 +254,7 @@
                                         <input type="password" placeholder="password" />
                                     </div>
                                 </div>
+                                @endif
                             </div>
                             <div class="different-address">
                                 <div class="ship-different-title">
@@ -203,30 +279,19 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="checkout-form-list">
-                                                <label>Company Name</label>
-                                                <input type="text" placeholder="" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="checkout-form-list">
                                                 <label>Address <span class="required">*</span></label>
                                                 <input type="text" placeholder="Street address" />
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="checkout-form-list">
-                                                <input type="text" placeholder="Apartment, suite, unit etc. (optional)" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="checkout-form-list">
-                                                <label>Town / City <span class="required">*</span></label>
+                                                <label>Provinsi <span class="required">*</span></label>
                                                 <input type="text" placeholder="Town / City" />
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="checkout-form-list">
-                                                <label>State / County <span class="required">*</span></label>
+                                                <label>Kota <span class="required">*</span></label>
                                                 <input type="text" placeholder="" />
                                             </div>
                                         </div>
@@ -388,4 +453,63 @@
     </section>
     <!-- checkout-area end -->
 </main>
+@endsection
+@section('script')
+    <script>
+        $(document).ready(function(){
+            $.ajax({
+                method:'GET',
+                url:'/getprovince',
+                success:function(data){
+                    var reslut = JSON.parse(data)
+                    var html = ''
+                    reslut['rajaongkir']['results'].forEach(element => {
+                       html += '<option value='+element.province_id+'>'+element.province+'</option>';
+                    });
+                    $('#province').html(html)
+                }
+            })
+            $('#province').change(function(){
+                var province_id = $('#province').val();
+                $.ajax({
+                    method:'GET',
+                    url:'/getcity/'+province_id,
+                    success:function(data){
+                        var reslut = JSON.parse(data)
+                        var html = '';
+                        reslut['rajaongkir']['results'].forEach(element => {
+                            if(element.type == 'Kabupaten'){
+                                html += '<option value='+element.city_id+'>'+'kab. '+element.city_name+'</option>';
+                            }else{
+                                html += '<option value='+element.city_id+'>'+element.city_name+'</option>';
+                            }
+                        });
+                        $('#city').html(html)
+                    }
+                })
+            })
+            $('#city').change(function(){
+                var city = $('#city').val();
+                var province = $('#province').val();
+                var weight = $('#weight').val();
+                $.ajax({
+                    method:'POST',
+                    url: '/getongkir',
+                    data:{city:city,province:province,weight:weight},
+                    success:function(data){
+                        var result = JSON.parse(data)
+                        var html = ''
+                        result['rajaongkir']['results'][0]['costs'].forEach(element => {
+                            html += '<option value='+element.cost[0].value+'>'+element.service +'-'+element.cost[0].etd+'hari'+'</option>';
+                        });
+                        $('#service').html(html)
+                    }
+                })
+            })
+            $('#service').change(function(){
+                var service = $('#service').val();
+                $('#ongkir').val(service);
+            })
+        })
+    </script>
 @endsection
